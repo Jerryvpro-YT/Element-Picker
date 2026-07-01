@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Picker Test Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1a73e8;
+        }
+
+        .test-section h2 {
+            color: #1a73e8;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* Various elements for testing */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e8eaed;
+        }
+
+        .card-primary {
+            border-left: 4px solid #1a73e8;
+        }
+
+        .card-success {
+            border-left: 4px solid #34a853;
+        }
+
+        .card-warning {
+            border-left: 4px solid #fbbc04;
+        }
+
+        .card-danger {
+            border-left: 4px solid #ea4335;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #1a73e8;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1557b0;
+        }
+
+        .btn-success {
+            background: #34a853;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #2d9249;
+        }
+
+        .btn-danger {
+            background: #ea4335;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #d33426;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1a73e8;
+            border: 2px solid #1a73e8;
+        }
+        .btn-outline:hover {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .badge-blue {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+
+        .badge-green {
+            background: #e6f4ea;
+            color: #1e7e34;
+        }
+
+        .badge-red {
+            background: #fce8e6;
+            color: #c62828;
+        }
+
+        .badge-yellow {
+            background: #fef7e0;
+            color: #e37400;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #3c4043;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #dadce0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .input-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid #e8eaed;
+            transition: all 0.2s;
+        }
+
+        .grid-item:hover {
+            border-color: #1a73e8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .grid-item .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .nested-elements {
+            padding: 15px;
+            background: #e8f0fe;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .nested-elements .child {
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            margin: 5px 0;
+            border: 1px solid #dadce0;
+        }
+
+        .nested-elements .child .grandchild {
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin: 5px 0 5px 20px;
+            border: 1px dashed #1a73e8;
+        }
+
+        .list-group {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-group li {
+            padding: 12px 15px;
+            background: white;
+            border: 1px solid #e8eaed;
+            margin: -1px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .list-group li:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .list-group li:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .list-group li:hover {
+            background: #f8f9fa;
+        }
+
+        .list-group .active {
+            background: #e8f0fe;
+            font-weight: 500;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #dadce0;
+        }
+
+        .flex-item.featured {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #3c4043;
+            border-bottom: 2px solid #dadce0;
+        }
+
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        table tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .status-online {
+            background: #34a853;
+        }
+        .status-offline {
+            background: #ea4335;
+        }
+        .status-pending {
+            background: #fbbc04;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+        }
+
+        @media (max-width: 600px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .flex-container {
+                flex-direction: column;
+            }
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+
+        /* Test specific classes for complex selectors */
+        .component-wrapper .component-inner .component-item {
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        [data-test="attribute-selector"] {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            border: 2px dashed #fbbc04;
+        }
+
+        /* Random classes for testing */
+        .class-1.class-2.class-3 {
+            background: #e6f4ea;
+            padding: 10px;
+        }
+
+        .long-class-name-that-is-very-verbose-for-testing-purposes {
+            background: #fce8e6;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Class Picker Test Page</h1>
+        
+        <p style="color: #5f6368; margin-bottom: 20px;">
+            Click <strong>Start Picking</strong> in the extension, then click any element below to see its classes and selector.
+        </p>
+
+        <!-- SECTION 1: Basic Elements -->
+        <div class="test-section">
+            <h2>📦 Basic Elements</h2>
+            <div class="card card-primary">
+                <h3 id="main-heading">This is a Heading</h3>
+                <p class="text-muted">This is a paragraph with class <code>text-muted</code></p>
+                <p class="text-muted" id="unique-paragraph">This paragraph has both a class and an ID</p>
+                <span class="badge badge-blue">Blue Badge</span>
+                <span class="badge badge-green">Green Badge</span>
+                <span class="badge badge-red">Red Badge</span>
+                <span class="badge badge-yellow">Yellow Badge</span>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Buttons -->
+        <div class="test-section">
+            <h2>🔘 Buttons</h2>
+            <div>
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-success">Success Button</button>
+                <button class="btn btn-danger">Danger Button</button>
+                <button class="btn btn-outline">Outline Button</button>
+                <button class="btn btn-primary" disabled>Disabled Button</button>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Cards Grid -->
+        <div class="test-section">
+            <h2>🃏 Cards</h2>
+            <div class="grid-3">
+                <div class="grid-item">
+                    <span class="icon">🚀</span>
+                    <h4>Feature 1</h4>
+                    <p style="font-size: 14px; color: #5f6368;">This is a feature card</p>
+                </div>
+                <div class="grid-item featured">
+                    <span class="icon">⭐</span>
+                    <h4>Feature 2</h4>
+                    <p style="font-size: 14px; opacity: 0.9;">This is a featured card</p>
+                </div>
+                <div class="grid-item">
+                    <span class="icon">🎯</span>
+                    <h4>Feature 3</h4>
+                    <p style="font-size: 14px; color: #5f6368;">This is another card</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Forms -->
+        <div class="test-section">
+            <h2>📝 Form Elements</h2>
+            <div class="input-group">
+                <label for="test-input">Text Input</label>
+                <input type="text" id="test-input" placeholder="Enter some text..." class="form-control">
+            </div>
+            <div class="input-group">
+                <label for="test-select">Select Dropdown</label>
+                <select id="test-select">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="test-textarea">Textarea</label>
+                <textarea id="test-textarea" placeholder="Write something..."></textarea>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Nested Elements -->
+        <div class="test-section">
+            <h2>🔗 Nested Elements (Complex Selectors)</h2>
+            <div class="nested-elements" id="nested-container">
+                <div class="child child-1">
+                    <strong>Child 1</strong>
+                    <div class="grandchild">Grandchild 1.1</div>
+                    <div class="grandchild">Grandchild 1.2</div>
+                </div>
+                <div class="child child-2">
+                    <strong>Child 2</strong>
+                    <div class="grandchild">Grandchild 2.1</div>
+                    <div class="grandchild grandchild-special">Grandchild 2.2 (special)</div>
+                </div>
+                <div class="child child-3">
+                    <strong>Child 3</strong>
+                    <div class="grandchild">Grandchild 3.1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: List Group -->
+        <div class="test-section">
+            <h2>📋 List Group</h2>
+            <ul class="list-group">
+                <li class="active">Item 1 (Active)</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li class="disabled" style="opacity: 0.5; cursor: not-allowed;">Item 4 (Disabled)</li>
+                <li>Item 5</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 7: Flex Layout -->
+        <div class="test-section">
+            <h2>📐 Flex Layout</h2>
+            <div class="flex-container">
+                <div class="flex-item">Flex Item 1</div>
+                <div class="flex-item featured">Flex Item 2 (Featured)</div>
+                <div class="flex-item">Flex Item 3</div>
+                <div class="flex-item">Flex Item 4</div>
+            </div>
+        </div>
+
+        <!-- SECTION 8: Table -->
+        <div class="test-section">
+            <h2>📊 Table</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="user-row">
+                            <td class="user-name">John Doe</td>
+                            <td><span class="status-indicator status-online"></span> Online</td>
+                            <td>Admin</td>
+                            <td><button class="btn btn-primary" style="padding: 4px 12px; font-size: 12px;">Edit</button></td>
+                        </tr>
+                        <tr class="user-row">
+                            <td class="user-name">Jane Smith</td>
+                            <td><span class="status-indicator status-offline"></span> Offline</td>
+                            <td>User</td>
+                            <td><button class="btn btn-primary" style="padding: 4px 12px; font-size: 12px;">Edit</button></td>
+                        </tr>
+                        <tr class="user-row">
+                            <td class="user-name">Bob Johnson</td>
+                            <td><span class="status-indicator status-pending"></span> Pending</td>
+                            <td>Moderator</td>
+                            <td><button class="btn btn-primary" style="padding: 4px 12px; font-size: 12px;">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 9: Special Elements -->
+        <div class="test-section">
+            <h2>🎨 Special Elements</h2>
+            
+            <div data-test="attribute-selector">
+                <strong>Element with data attribute:</strong> <code>data-test="attribute-selector"</code>
+                <p style="margin-top: 8px;">Click this container to see the data attribute in the selector</p>
+            </div>
+
+            <div class="class-1 class-2 class-3" style="margin-top: 10px;">
+                <strong>Multiple classes:</strong> <code>class-1 class-2 class-3</code>
+            </div>
+
+            <div class="long-class-name-that-is-very-verbose-for-testing-purposes" style="margin-top: 10px;">
+                <strong>Long class name:</strong> <code>long-class-name-that-is-very-verbose-for-testing-purposes</code>
+            </div>
+        </div>
+
+        <!-- SECTION 10: Code Block -->
+        <div class="test-section">
+            <h2>💻 Code Block</h2>
+            <div class="code-block">
+                <span class="comment">// This is a comment</span><br>
+                <span class="keyword">function</span> <span style="color: #dcdcaa;">getElementClasses</span>(element) {<br>
+                &nbsp;&nbsp;<span class="keyword">return</span> <span style="color: #569cd6;">element</span>.<span style="color: #dcdcaa;">className</span>.<span style="color: #dcdcaa;">split</span>(<span class="string">' '</span>);<br>
+                }
+            </div>
+        </div>
+
+        <!-- SECTION 11: Component with deeper nesting -->
+        <div class="test-section">
+            <h2>🏗️ Deep Nesting</h2>
+            <div class="component-wrapper">
+                <div class="component-inner">
+                    <div class="component-item">
+                        <span class="item-label">Label 1</span>
+                        <span class="item-value">Value 1</span>
+                    </div>
+                    <div class="component-item">
+                        <span class="item-label">Label 2</span>
+                        <span class="item-value">Value 2</span>
+                    </div>
+                    <div class="component-item">
+                        <span class="item-label">Label 3</span>
+                        <span class="item-value">Value 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div style="margin-top: 40px; padding: 20px; background: #e8f0fe; border-radius: 8px; border: 2px solid #1a73e8;">
+            <h3 style="color: #1a73e8; margin-bottom: 10px;">📖 Testing Instructions</h3>
+            <ul style="padding-left: 20px; color: #3c4043;">
+                <li>Click the extension icon and click <strong>"Start Picking"</strong></li>
+                <li>Hover over elements to see them highlighted in blue</li>
+                <li>Click any element to inspect it</li>
+                <li>Open the extension popup to see the element's:</li>
+                <ul>
+                    <li>Tag name</li>
+                    <li>Classes (including parent classes)</li>
+                    <li>ID (if present)</li>
+                    <li>Unique CSS selector</li>
+                </ul>
+                <li>Use the copy buttons to copy the selector or classes</li>
+                <li>Press <kbd>ESC</kbd> to stop picking mode</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center; color: #5f6368; font-size: 13px;">
+            🎯 Test page for Chrome Extension Class Picker
+        </div>
+    </div>
+</body>
+</html>
