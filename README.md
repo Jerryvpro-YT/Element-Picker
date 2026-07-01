@@ -41,4 +41,18 @@ Since this extension isn't on the Chrome Web Store yet, you can install it manua
 *   **Font Awesome:** For clean and professional icons.
 *   **Exo 2 Font:** A modern font from Google Fonts.
 
-## 📁 File Structure
+## 🔒 Privacy Policy
+
+This extension **does not collect or transmit any data**. All operations are performed locally in your browser.
+
+*   No tracking scripts
+*   No analytics
+*   No data is sent to any server (except for loading Font Awesome from its CDN).
+
+## 🤝 Contributing
+
+Found a bug or have a feature idea? Feel free to open an issue on this repository. Contributions are welcome!
+
+## 📜 License
+
+This project is licensed under the MIT License.
